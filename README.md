@@ -1,57 +1,29 @@
-# ThermoPredict • Prédiction du Point d'Ébullition Moléculaire (QSPR)
-
-Application Web interactive pour la prédiction de la température d'ébullition de composés chimiques par Machine Learning (QSPR avec RDKit, Scikit-Learn et PubChem).
-
 ---
 
-## 🌟 Fonctionnalités Clés pour la Soutenance
+## 🧠 Approche Scientifique et Méthodologie
 
-1. **Recherche & Résolution Multi-Critères** :
-   - Recherche par **Nom** (*Ethanol, Benzène, Acétone*), **Formule brute** (*C2H6O, H2O, C8H10N4O2*) ou **SMILES** direct (*CCO, O*).
-   - Dictionnaire local prioritaire pour une réactivité instantanée + fallback automatique sur l'API PubChem PUG REST.
+Ce projet ne se contente pas d'utiliser une formule empirique classique ; il repose sur une approche moderne de **QSPR** (Quantitative Structure-Property Relationship) couplée au Machine Learning.
 
-2. **Inférence QSPR & Calibration** :
-   - Calcul en temps réel de 200+ descripteurs physico-chimiques RDKit.
-   - Régression Random Forest / ExtraTrees avec calibration linéaire d'aplatissement de moyenne.
+### 1. Comparaison avec les méthodes classiques (Joback, Antoine)
+Pour prédire une température d'ébullition, la chimie traditionnelle utilise des méthodes empiriques :
+*   **La méthode de Joback-Reid :** Elle est basée sur la "contribution de groupes". La molécule est découpée en sous-groupes (ex: -CH3, -OH) et on additionne l'impact de chaque groupe via une formule fixe. Bien qu'efficace, elle est limitée aux groupes répertoriés et ne capture pas les interactions 3D complexes.
+*   **L'équation d'Antoine :** Elle utilise des constantes (A, B, C) spécifiques à chaque molécule pour relier la pression de vapeur à la température. Elle nécessite une base de données gigantesque de constantes pré-calculées et ne permet pas de prédire la température d'une nouvelle molécule inconnue sans données préalables.
 
-3. **Visualisation Moléculaire 3D (3Dmol.js)** :
-   - Visualisation 3D interactive avec palette de couleurs pastel douces (Carbone violet, Oxygène rose, Hydrogène blanc).
-   - Rotation continue, zoom, orbite et basculement de représentations (Bâtonnets, Sphères, Boules & Bâtons).
-   - Support dédié pour la molécule d'eau ($H_2O$) via coordonnées XYZ explicites.
+**L'avantage de l'approche QSPR (ce projet) :** Au lieu d'utiliser des formules figées, notre modèle **Random Forest** apprend automatiquement les relations complexes entre la structure mathématique de la molécule (les descripteurs) et sa température d'ébullition. Il peut ainsi prédire la température de n'importe quelle nouvelle molécule à partir de sa structure.
 
-4. **✨ FEATURE 1 : Explainable AI (XAI - Feature Importance)** :
-   - Extraction dynamique des 4 descripteurs moléculaires les plus influents (`feature_importances_` du Random Forest).
-   - Barres de progression pastel affichant l'impact relatif (%) et la valeur du descripteur pour la molécule analysée.
+### 2. L'explication du code : Comment ça marche ?
+Le pipeline de prédiction (dans `predire_ebullition.py` et `app.py`) suit les étapes suivantes :
 
-5. **✨ FEATURE 2 : Mode Comparatif ("Compare Mode" ⚖️)** :
-   - Bouton **"Add to Compare ⚖️"** permettant d'empiler jusqu'à 4 molécules dans un plateau comparatif (*Comparison Lab Tray*).
-   - Comparaison côte à côte des températures d'ébullition et calcul automatique du différentiel thermique ($\Delta T$) par rapport à la molécule de référence.
+1.  **Acquisition du SMILES :** L'utilisateur entre un nom, une formule ou un SMILES. Le backend interroge l'API PubChem pour obtenir le code SMILES canonique (la structure exacte de la molécule).
+2.  **Vectorisation (RDKit) :** Le code SMILES est transformé en objet molécule via la bibliothèque `RDKit`. Le script calcule ensuite plus de 200 **descripteurs physico-chimiques** (MolMR, indices de connectivité, surface de van der Waals, etc.). Ces descripteurs sont stockés dans un DataFrame `Pandas`.
+3.  **Inférence (Scikit-Learn) :** Ces données sont passées à un modèle **Random Forest** (chargé via `Joblib`). Le modèle génère une prédiction brute.
+4.  **Calibration :** Un modèle de calibration linéaire ajuste la prédiction pour corriger les biais du Random Forest et améliorer la précision (erreur MAE réduite).
+5.  **IA Explicable (Explainable AI) :** Le backend extrait les `feature_importances_` du modèle Random Forest. Cela permet d'afficher sur le frontend les 4 descripteurs qui ont le plus influencé la prédiction, rendant l'IA transparente.
 
-6. **✨ FEATURE 3 : Export de Rapport de Laboratoire en PDF (fpdf2 📄)** :
-   - Bouton **"Export as PDF 📄"** qui génère un document officiel au format PDF.
-   - Inclut : Nom, Formule, SMILES, CID, Température (°C et K), Marge d'erreur (MAE), Tableau Explainable AI et Remarques physico-chimiques.
-
-7. **Sécurité & Authentification Démo** :
-   - Page de connexion dédiée : `admin` / `chem123` ou `prof` / `gradeA`.
-   - Bouton d'autofill pour une démonstration fluide lors de la présentation.
-
----
-
-## 🚀 Démarrage Rapide
-
-### 1. Installation des dépendances
-
-```bash
-pip install -r requirements.txt
-```
-
-*(Nécessite `flask`, `requests`, `fpdf2`, `rdkit`, `pandas`, `numpy`, `scikit-learn`, `joblib`)*
-
-### 2. Lancement du serveur Web Flask
-
-```bash
-python app.py
-```
-
-Accédez ensuite à l'application dans votre navigateur :
-👉 **http://127.0.0.1:5000**
+### 3. Le rôle des bibliothèques utilisées
+*   **`RDKit`** : Le cœur chimique du projet. Il convertit le texte (SMILES) en structure moléculaire et calcule les descripteurs mathématiques.
+*   **`Scikit-Learn`** : Utilisé pour entraîner le modèle de régression (Random Forest) et le calibrateur.
+*   **`Pandas` & `NumPy`** : Gèrent les matrices de données (les descripteurs) avant de les envoyer au modèle.
+*   **`Flask`** : Le framework web backend qui fait le lien entre l'interface utilisateur et le modèle Python.
+*   **`Joblib`** : Permet de sauvegarder et recharger le modèle entraîné (`.joblib`) sans avoir à le ré-entraîner à chaque démarrage du serveur.
+*   **`3Dmol.js`** (Frontend) : Bibliothèque JavaScript qui récupère les coordonnées 3D de PubChem et dessine la molécule de manière interactive sur la page web.
