@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Lab Login 🧪 • Study Notes</title>
+
+    <!-- Google Fonts: Quicksand (Clean Study Notes) & Caveat (Handwritten Accents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        pastelPink: '#FFD1DC',
+                        pastelMint: '#D4F0F0',
+                        pastelYellow: '#FFFACD',
+                        pastelLavender: '#E6E6FA',
+                        softCream: '#FDFBF7',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FDFBF7;
+            background-image: 
+                radial-gradient(#E2D9CC 1.1px, transparent 1.1px),
+                linear-gradient(to right, #F4EFE6 1px, transparent 1px),
+                linear-gradient(to bottom, #F4EFE6 1px, transparent 1px);
+            background-size: 24px 24px;
+            min-height: 100vh;
+        }
+
+        /* Handwritten font utility */
+        .font-caveat {
+            font-family: 'Caveat', cursive;
+        }
+
+        /* Washi tape sticker effect */
+        .washi-tape-mint {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1.5deg);
+            width: 140px;
+            height: 30px;
+            background: rgba(212, 240, 240, 0.85);
+            border-left: 3px dashed rgba(160, 210, 210, 0.7);
+            border-right: 3px dashed rgba(160, 210, 210, 0.7);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            z-index: 20;
+        }
+
+        .washi-tape-yellow {
+            position: absolute;
+            bottom: -10px;
+            right: 28px;
+            transform: rotate(2deg);
+            width: 90px;
+            height: 24px;
+            background: rgba(255, 250, 205, 0.9);
+            border-left: 2px dashed rgba(230, 215, 150, 0.7);
+            border-right: 2px dashed rgba(230, 215, 150, 0.7);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            z-index: 20;
+        }
+
+        /* Floating chemistry stickers */
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(4deg); }
+        }
+
+        .sticker-float-1 { animation: float-gentle 4.5s ease-in-out infinite; }
+        .sticker-float-2 { animation: float-gentle 5.2s ease-in-out infinite 0.9s; }
+        .sticker-float-3 { animation: float-gentle 4.8s ease-in-out infinite 1.6s; }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 relative overflow-hidden select-none">
+
+    <!-- Chemistry Doodles in Background -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div class="sticker-float-1 absolute top-12 left-12 text-5xl opacity-75">🧪</div>
+        <div class="sticker-float-2 absolute top-20 right-16 text-6xl opacity-70">⚛️</div>
+        <div class="sticker-float-3 absolute bottom-20 left-16 text-5xl opacity-75">🔬</div>
+        <div class="sticker-float-1 absolute bottom-14 right-24 text-6xl opacity-75">⚗️</div>
+        <div class="sticker-float-2 absolute top-1/2 left-8 text-4xl opacity-60">🧬</div>
+        <div class="sticker-float-3 absolute top-1/3 right-10 text-4xl opacity-65">🧫</div>
+        <div class="sticker-float-1 absolute bottom-1/3 left-1/4 text-4xl opacity-50">💡</div>
+    </div>
+
+    <!-- Main Sticky Note Login Card -->
+    <div class="relative w-full max-w-md my-8">
+        
+        <!-- Washi Tape Strips -->
+        <div class="washi-tape-mint"></div>
+        <div class="washi-tape-yellow"></div>
+
+        <!-- Sticky Note Paper Card -->
+        <div class="relative bg-white rounded-[28px] border-[3.5px] border-[#374151] p-8 md:p-9 shadow-[6px_6px_0px_#FFD1DC]">
+
+            <!-- Top Grid Binder Accents -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b-2 border-dashed border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-[#FFD1DC] border-2 border-[#374151]"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-[#FFFACD] border-2 border-[#374151]"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-[#D4F0F0] border-2 border-[#374151]"></span>
+                </div>
+                <span class="font-caveat text-xl text-slate-500 font-bold tracking-wide">Lab Notebook #42 📝</span>
+            </div>
+
+            <!-- Card Header -->
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFFACD] border-2 border-[#374151] text-slate-800 text-xs font-bold uppercase tracking-wider mb-2.5 shadow-[2px_2px_0px_#374151]">
+                    <span>🔬</span> Chem Station Authorization
+                </div>
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight flex items-center justify-center gap-2">
+                    <span>Chemistry Lab Login</span>
+                    <span class="text-2xl">🧪</span>
+                </h1>
+                <p class="font-caveat text-lg text-slate-600 mt-1">
+                    Study notes & QSPR thermodynamic engine ⚗️
+                </p>
+            </div>
+
+            <!-- Error Notification Sticky Tag -->
+            {% if error %}
+            <div class="mb-5 p-3 rounded-2xl bg-[#FFE4E6] border-[2.5px] border-[#FB7185] text-[#9F1239] text-sm font-bold flex items-center justify-center gap-2 shadow-[3px_3px_0px_#FB7185] animate-bounce">
+                <span>⚠️</span>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Login Form -->
+            <form action="{{ url_for('login') }}" method="POST" class="space-y-4">
+                
+                <!-- Username Input -->
+                <div>
+                    <label for="username" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                        <span>Username</span>
+                        <span>📝</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="username" 
+                        placeholder="e.g. admin" 
+                        required
+                        autocomplete="username"
+                        class="w-full px-4 py-3 rounded-2xl bg-white border-[3px] border-[#FFD1DC] text-slate-800 placeholder-slate-400 font-bold focus:outline-none focus:border-[#FB7185] focus:ring-4 focus:ring-[#FFD1DC]/40 transition-all text-sm shadow-[3px_3px_0px_#FFE4E6]"
+                    />
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                        <span>Password</span>
+                        <span>💡</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="••••••••" 
+                        required
+                        autocomplete="current-password"
+                        class="w-full px-4 py-3 rounded-2xl bg-white border-[3px] border-[#FFD1DC] text-slate-800 placeholder-slate-400 font-bold focus:outline-none focus:border-[#FB7185] focus:ring-4 focus:ring-[#FFD1DC]/40 transition-all text-sm shadow-[3px_3px_0px_#FFE4E6]"
+                    />
+                </div>
+
+                <!-- Enter the Lab Button (Pastel Mint with Bold Border) -->
+                <button 
+                    type="submit" 
+                    class="w-full mt-2 py-3.5 px-6 rounded-2xl font-bold text-slate-900 text-base bg-[#D4F0F0] border-[3px] border-[#374151] shadow-[4px_4px_0px_#374151] hover:shadow-[2px_2px_0px_#374151] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                    <span class="tracking-wide">Enter the Lab</span>
+                    <span class="text-xl">⚗️</span>
+                </button>
+            </form>
+
+            <!-- Demo Hint Sticky Note -->
+            <div class="mt-6 pt-4 border-t-2 border-dashed border-slate-200 text-center">
+                <button 
+                    type="button" 
+                    id="autofill-btn"
+                    title="Cliquer pour remplir automatiquement"
+                    class="inline-block px-3.5 py-1.5 rounded-xl bg-[#FFFACD] border-[2px] border-[#374151] text-slate-800 text-xs font-bold tracking-tight shadow-[2px_2px_0px_#374151] hover:bg-[#FFF59D] transition-colors cursor-pointer"
+                >
+                    💡 Demo: User = <span class="text-[#D946EF] underline">admin</span> | Pass = <span class="text-[#2563EB] underline">chem123</span>
+                </button>
+                <p class="font-caveat text-sm text-slate-500 mt-2">
+                    (Click sticker to auto-fill for presentation 🧫)
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Presentation Autofill Handler -->
+    <script>
+        document.getElementById("autofill-btn").addEventListener("click", () => {
+            document.getElementById("username").value = "admin";
+            document.getElementById("password").value = "chem123";
+        });
+    </script>
+</body>
+</html>
