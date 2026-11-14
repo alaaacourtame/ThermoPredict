@@ -1,9 +1,8 @@
-rdkit
+flask
 pandas
 numpy
 scikit-learn
 joblib
-flask
 requests
 fpdf2
-gunicorn 
+gunicorn

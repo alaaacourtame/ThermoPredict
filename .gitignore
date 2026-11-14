@@ -1,1 +1,17 @@
+# Modèle lourd (non supporté par GitHub/Vercel > 100 Mo)
 *.joblib
+modele_ebullition.joblib
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnements virtuels
+venv/
+env/
+.env
+
+# Configuration IDE
+.vscode/
+.idea/
